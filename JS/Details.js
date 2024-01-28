@@ -7,12 +7,14 @@ export class Details {
     this.getDetails(this.id);
   }
   async getDetails(id) {
+    this.home.showLoadingScreen();
     let detailsApi = await fetch(
       `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
     );
     let detailsRsponse = await detailsApi.json();
     let mealDetails = detailsRsponse.meals[0];
     this.displayDetails(mealDetails);
+    this.home.hideLoadingScreen();
   }
   getReciepes(mealData) {
     let reciepes = [];
@@ -24,10 +26,6 @@ export class Details {
       }
     }
     return reciepes;
-  }
-  getTags(mealData) {
-    let tags = mealData.strTags.split(",");
-    return tags;
   }
   displayDetails(data) {
     let detailsBox = `
@@ -64,13 +62,15 @@ export class Details {
     this.home.ui.searchInputs.innerHTML = "";
     this.home.ui.rowData.innerHTML = "";
     this.home.ui.rowData.innerHTML = detailsBox;
-    this.home.ui.returnToStart()
+    this.home.ui.returnToStart();
   }
 }
 
-
 /**
-
+ getTags(mealData) {
+    let tags = mealData.strTags.split(",");
+    return tags;
+  }
 
   <h2>Tags:</h2>
     <div class="d-flex flex-wrap gap-2 my-3 ">

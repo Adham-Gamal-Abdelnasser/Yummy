@@ -1,21 +1,22 @@
-import { Details } from "./Details.js"
+import { Details } from "./Details.js";
 
-export class Ui{
-    constructor(){
-        this.rowData = document.getElementById("rowData")
-        this.searchedMealsArea = document.getElementById("searchedMealsArea")
-        this.searchInputs = document.getElementById("searchInputs")
-        this.nameTouched = false
-        this.mailTouched = false
-        this.phoneTouched = false
-        this.ageTouched = false
-        this.passTouched = false
-        this.repassTouched = false
-    }
-    displayMeals(data){
-        let mealsBox = ``
-        for (let i = 0; i < data.length; i++) {
-            mealsBox += `
+export class Ui {
+  constructor() {
+    this.rowData = document.getElementById("rowData");
+    this.searchedMealsArea = document.getElementById("searchedMealsArea");
+    this.searchInputs = document.getElementById("searchInputs");
+    this.nameTouched = false;
+    this.mailTouched = false;
+    this.phoneTouched = false;
+    this.ageTouched = false;
+    this.passTouched = false;
+    this.repassTouched = false;
+    this.closeBtn = document.getElementById("closeBtn");
+  }
+  displayMeals(data) {
+    let mealsBox = ``;
+    for (let i = 0; i < data.length; i++) {
+      mealsBox += `
         
             <div class="col-sm-12 col-md-6 col-lg-3 my-3">
             <div data-id="${data[i].idMeal}" class="meal cursor-pointer w-100 position-relative overflow-hidden
@@ -29,88 +30,96 @@ export class Ui{
                 </div>
             </div>
         </div>
-            ` 
-        }
-        this.emptySearchedMealsArea()
-        this.rowData.innerHTML = mealsBox
-        if (document.getElementById("searchInputName")) {
-            this.rowData.innerHTML = ""
-            this.searchedMealsArea.innerHTML = mealsBox
-        }
-        let meals= Array.from(document.querySelectorAll(".meal"))
-        meals.forEach(mealCard=>{
-        mealCard.addEventListener("click",(e)=>{
-            console.log(e.target);
-            console.log("not shown yet");
-            new Details(mealCard.dataset.id)
-            console.log("show done");
-        })
-        })
+            `;
     }
-    displayArea(data){
-        let areaBox = ``
-        for (let i = 0; i < data.length; i++) {
-            areaBox += `
+    this.emptySearchedMealsArea();
+    this.rowData.innerHTML = mealsBox;
+    if (document.getElementById("searchInputName")) {
+      this.rowData.innerHTML = "";
+      this.searchedMealsArea.innerHTML = mealsBox;
+    }
+    let meals = Array.from(document.querySelectorAll(".meal"));
+    meals.forEach((mealCard) => {
+      mealCard.addEventListener("click", (e) => {
+        console.log(e.target);
+        console.log("not shown yet");
+        new Details(mealCard.dataset.id);
+        console.log("show done");
+      });
+    });
+  }
+  displayArea(data) {
+    let areaBox = ``;
+    for (let i = 0; i < data.length; i++) {
+      areaBox += `
             <div class="col-sm-12 col-md-6 col-lg-3">
                             <div data-section="${data[i].strArea}" class="area cursor-pointer d-flex flex-column align-items-center text-white my-3">
                                 <span class="fa-solid fa-house-laptop fs-1"></span>
                                 <h2>${data[i].strArea}</h2>
                             </div>
                         </div>
-            ` 
-        }
-        this.emptySearchedMealsArea()
-        this.rowData.innerHTML = areaBox
-        this.returnToStart()
-        this.removeSearchInputs()
+            `;
     }
-    displayCategories (data){
-        let categoryBox = ``
-        for (let i = 0; i < data.length; i++) {
-            categoryBox += `
+    this.emptySearchedMealsArea();
+    this.rowData.innerHTML = areaBox;
+    this.returnToStart();
+    this.removeSearchInputs();
+  }
+  displayCategories(data) {
+    let categoryBox = ``;
+    for (let i = 0; i < data.length; i++) {
+      categoryBox += `
                     <div class="col-sm-12 col-md-6 col-lg-3 my-3">
-                        <div data-section="${data[i].strCategory}" class="category cursor-pointer w-100 position-relative overflow-hidden
+                        <div data-section="${
+                          data[i].strCategory
+                        }" class="category cursor-pointer w-100 position-relative overflow-hidden
                             rounded-3 ">
                             <img src="${data[i].strCategoryThumb}"
                                 class="w-100 "
                                 alt="..." />
                             <div class="caption bg-white w-100 position-absolute
                                 h-100 d-flex align-items-center d-flex flex-column align-items-center p-2">
-                                <h2 class="text-black">${data[i].strCategory}</h2>
-                                <p>${data[i].strCategoryDescription.split(" ",20).join(" ")}</p>
+                                <h2 class="text-black">${
+                                  data[i].strCategory
+                                }</h2>
+                                <p>${data[i].strCategoryDescription
+                                  .split(" ", 20)
+                                  .join(" ")}</p>
                             </div>
                         </div>
                     </div>
-            `            
-        }
-        this.returnToStart()
-        this.emptySearchedMealsArea()
-        this.rowData.innerHTML = categoryBox
-        this.removeSearchInputs()
+            `;
     }
-    displayIngredients(data){
-        let ingredientsBox = ``
-        for (let i = 0; i < data.length; i++) {
-                ingredientsBox+= `
+    this.returnToStart();
+    this.emptySearchedMealsArea();
+    this.rowData.innerHTML = categoryBox;
+    this.removeSearchInputs();
+  }
+  displayIngredients(data) {
+    let ingredientsBox = ``;
+    for (let i = 0; i < data.length; i++) {
+      ingredientsBox += `
             <div class="col-sm-12 col-md-6 col-lg-3">
-            <div data-section="${data[i].strIngredient}" class="ingredient cursor-pointer d-flex flex-column align-items-center text-white my-3">
+            <div data-section="${
+              data[i].strIngredient
+            }" class="ingredient cursor-pointer d-flex flex-column align-items-center text-white my-3">
                 <span class="fa-solid fa-drumstick-bite fa-4x"></span>
                 <h2>${data[i].strIngredient}</h2>
-                <p>${data[i].strDescription.split(" ",25).join(" ")}</p>
+                <p>${data[i].strDescription.split(" ", 25).join(" ")}</p>
             </div>
         </div>
-            `
-            if (i==19) {
-                break;
-            }
-        }
-        this.emptySearchedMealsArea()
-        this.rowData.innerHTML = ingredientsBox
-        this.returnToStart()
-        this.removeSearchInputs()
+            `;
+      if (i == 19) {
+        break;
+      }
     }
-    displayContact(){
-        let contactBox = `
+    this.emptySearchedMealsArea();
+    this.rowData.innerHTML = ingredientsBox;
+    this.returnToStart();
+    this.removeSearchInputs();
+  }
+  displayContact() {
+    let contactBox = `
         <div class="col-md-6">
         <input type="text" class="my-2 form-control border
             border-1 border-light" placeholder="Enter Your Name"
@@ -167,14 +176,14 @@ export class Ui{
     <div class="col-md-4 text-center my-3 mx-auto">
         <button class="btn btn-outline-primary" id="submitBtn" disabled>Submit</button>
     </div>
-        `
-        this.emptySearchedMealsArea()
-        this.rowData.innerHTML = contactBox
-        this.removeSearchInputs()
-        this.returnToStart()
-    }
-    displaySearch() {
-        let searchBox = `
+        `;
+    this.emptySearchedMealsArea();
+    this.rowData.innerHTML = contactBox;
+    this.removeSearchInputs();
+    this.returnToStart();
+  }
+  displaySearch() {
+    let searchBox = `
         <div class="row my-4">
         <div class="col-md-6">
             <input type="text" class="my-2 form-control border border-1 border-light" placeholder="Search By Name" id="searchInputName"/> 
@@ -184,21 +193,20 @@ export class Ui{
         </div>
     </div>
     
-        `
-        this.searchInputs.innerHTML= searchBox
-        this.rowData.innerHTML=""
-        this.returnToStart()
-    }
-    removeSearchInputs(){
-        this.searchInputs.innerHTML = ""
-    }
-    emptySearchedMealsArea(){
-        this.searchedMealsArea.innerHTML=""
-    }
-    returnToStart(){
-        document.getElementById("closeBtn").addEventListener("click",()=>{
-          window.location.reload()
-          console.log("clicked");
-        })
-    }
+        `;
+    this.searchInputs.innerHTML = searchBox;
+    this.rowData.innerHTML = "";
+    this.returnToStart();
+  }
+  removeSearchInputs() {
+    this.searchInputs.innerHTML = "";
+  }
+  emptySearchedMealsArea() {
+    this.searchedMealsArea.innerHTML = "";
+  }
+  returnToStart() {
+    this.closeBtn.addEventListener("click", () => {
+      window.location.reload();
+    });
+  }
 }

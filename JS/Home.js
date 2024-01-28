@@ -1,33 +1,31 @@
 import { Ui } from "./Ui.js";
 export class Home {
   constructor() {
-    $(document).ready(()=>{
-      this.getMealsAndSearch("s","").then(()=>{
-        this.hideLoadingScreen()
-  
+    $(document).ready(() => {
+      this.getMealsAndSearch("s", "").then(() => {
+        this.hideLoadingScreen();
       });
-    })
+    });
     this.ui = new Ui();
-    
     this.search = document.getElementById("search");
     this.categories = document.getElementById("categories");
     this.area = document.getElementById("area");
     this.ingredients = document.getElementById("ingredients");
     this.contact = document.getElementById("contact");
     this.area.addEventListener("click", () => {
-      this.showLoadingScreen()
+      this.showLoadingScreen();
       this.getAreas();
-      this.hideLoadingScreen()
+      this.hideLoadingScreen();
     });
     this.categories.addEventListener("click", () => {
-      this.showLoadingScreen()
+      this.showLoadingScreen();
       this.getCategories();
-      this.hideLoadingScreen()
+      this.hideLoadingScreen();
     });
     this.ingredients.addEventListener("click", () => {
-      this.showLoadingScreen()
+      this.showLoadingScreen();
       this.getIngredients();
-      this.hideLoadingScreen()
+      this.hideLoadingScreen();
     });
     this.contact.addEventListener("click", () => {
       this.ui.displayContact();
@@ -47,30 +45,35 @@ export class Home {
     this.searchedMealsArea;
     this.search.addEventListener("click", () => {
       this.ui.displaySearch();
-      this.searchInputName = document.getElementById("searchInputName")
-      this.searchInputFirstLetter = document.getElementById("searchInputFirstLetter")
-      this.searchedMealsArea = document.getElementById("searchedMealsArea")
-      this.searchInputName.addEventListener("keyup",() => {
-        this.getMealsAndSearch("s",this.searchInputName.value)
-      })
-      this.searchInputFirstLetter.addEventListener("keyup",() => {
-        
-        this.searchInputFirstLetter.value ? this.getMealsAndSearch("f",this.searchInputFirstLetter.value.toLowerCase()) : this.ui.searchedMealsArea.innerHTML=""
-      })
+      this.searchInputName = document.getElementById("searchInputName");
+      this.searchInputFirstLetter = document.getElementById(
+        "searchInputFirstLetter"
+      );
+      this.searchedMealsArea = document.getElementById("searchedMealsArea");
+      this.searchInputName.addEventListener("keyup", () => {
+        this.getMealsAndSearch("s", this.searchInputName.value);
+      });
+      this.searchInputFirstLetter.addEventListener("keyup", () => {
+        this.searchInputFirstLetter.value
+          ? this.getMealsAndSearch(
+              "f",
+              this.searchInputFirstLetter.value.toLowerCase()
+            )
+          : (this.ui.searchedMealsArea.innerHTML = "");
+      });
     });
-    
   }
 
-  async getMealsAndSearch(apiLetter,mealNameOrFirstLetter) {
+  async getMealsAndSearch(apiLetter, mealNameOrFirstLetter) {
     const responseOfRandomMeals = await fetch(
       `https://www.themealdb.com/api/json/v1/1/search.php?${apiLetter}=${mealNameOrFirstLetter}`
     );
     const convertApiResponse = await responseOfRandomMeals.json();
-    convertApiResponse.meals ? this.ui.displayMeals(convertApiResponse.meals) : this.ui.displayMeals([])
-
+    convertApiResponse.meals
+      ? this.ui.displayMeals(convertApiResponse.meals)
+      : this.ui.displayMeals([]);
   }
   async getAreas() {
-    // this.showLoadingScreen()
     const responseOfAreas = await fetch(
       "https://www.themealdb.com/api/json/v1/1/list.php?a=list"
     );
@@ -78,18 +81,18 @@ export class Home {
     this.ui.displayArea(convertAreasResponse.meals);
     let areas = Array.from(document.querySelectorAll(".area"));
     this.displayInnerSections(areas, "a");
-    // this.hideLoadingScreen()
   }
   displayInnerSections(divsContainer, sectionLetter) {
     let ui = new Ui();
-    divsContainer.forEach(div => {
+    divsContainer.forEach((div) => {
       div.addEventListener("click", async function () {
-        
+        $(".loading").fadeIn(0);
         let responseOfSelected = await fetch(
           `https://www.themealdb.com/api/json/v1/1/filter.php?${sectionLetter}=${div.dataset.section}`
         );
         let convertResponseOfSelected = await responseOfSelected.json();
         ui.displayMeals(convertResponseOfSelected.meals);
+        $(".loading").fadeOut(500);
       });
     });
   }
@@ -196,7 +199,6 @@ export class Home {
   }
   submitButtonOn() {
     const submitBtn = document.getElementById("submitBtn");
-
     if (
       this.ui.nameTouched &&
       this.ui.mailTouched &&
@@ -209,9 +211,9 @@ export class Home {
     }
   }
   hideLoadingScreen() {
-    $(".loading").fadeOut(500)
+    $(".loading").fadeOut(500);
   }
-  showLoadingScreen(){
-    $(".loading").fadeIn(0)
+  showLoadingScreen() {
+    $(".loading").fadeIn(0);
   }
 }
