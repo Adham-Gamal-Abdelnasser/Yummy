@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yummy</title>
+    <!-- ! WEBSITE ICON -->
+    <link rel="website icon" href="images/logo.png" type="png" />
+    <!-- ! BOOTSTARP -->
+    <link
+      rel="stylesheet"
+      href="CSS/bootstrap-5.3.0-alpha1-dist/css/bootstrap.min.css"
+    />
+    <!-- ! fONTAWESOME -->
+    <link rel="stylesheet" href="CSS/all.min.css" />
+    <!-- ! CSS MAIN FILE -->
+    <link rel="stylesheet" href="CSS/style.css" />
+  </head>
+  <body>
+    <aside id="sideBar" class="position-fixed top-0 bottom-0 bg-dark min-vh-100 d-flex">
+        <div class="inner-bar d-flex flex-column justify-content-between p-3 pe-0 align-items-start min-vh-100">
+            <div class="d-flex flex-column gap-3 overflow-hidden">
+                <a href="#" class="text-decoration-none text-white position-relative" id="search">Search</a>
+                <a href="#" class="text-decoration-none text-white position-relative" id="categories">Categories</a>
+                <a href="#" class="text-decoration-none text-white position-relative" id="area">Area</a>
+                <a href="#" class="text-decoration-none text-white position-relative" id="ingredients">Ingredients</a>
+                <a href="#" class="text-decoration-none text-white position-relative" id="contact">Contact Us</a>
+            </div>
+            <ul class="fa-ul ms-4">
+                <li class="my-4">
+                  <span class="fa-li"><i class="fab fa-github text-primary"></i></span>
+                  <a class="text-decoration-none text-white mt-5" href="https://github.com/Adham-Gamal-Abdelnasser">Adham-Gamal-Abdelnasser</a>
+                </li>
+                <li class="my-4">
+                  <span class="fa-li"><i class="fab fa-linkedin-in text-primary"></i></span>
+                  <a class="text-decoration-none text-white" href="https://www.linkedin.com/in/adham-gamal-abdelnasser-%F0%9F%87%B5%F0%9F%87%B8-b47312225/">Adham Gamal Abdelnasser</a>
+                </li>
+                <li class="my-4">
+                  <span class="fa-li"><i class="fab fa-facebook-f text-primary"></i></span>
+                  <a class="text-decoration-none text-white" href="https://www.facebook.com/adham.gamal.9404/">Adham Abdelnasser</a>
+                </li>
+            </ul>
+            <p class="text-white">Copyright Â© <span id="currentYear">2019</span> All Rights Reserved.</p>
+                
+        </div>
+        <div class="bg-white d-flex flex-column justify-content-between align-items-center p-2">
+            <div class="site-img">
+                <img src="images/image_22.png" class="w-100"/>
+            </div>
+            <i class="fas fa-bars fs-2 cursor-pointer"  id="sideBtn" ></i>
+            <a href="https://www.linkedin.com/in/adham-gamal-abdelnasser-%F0%9F%87%B5%F0%9F%87%B8-b47312225/" class="outer-douma d-flex justify-content-center align-items-center">
+                <img src="images/logo.png" class="w-100">
+            </a>
+        </div>
+    </aside>
+
+    <section>
+      <i class="fas fa-xmark fs-3 text-danger position-absolute" id="closeBtn"></i>
+      <div class="container" id="searchInputs"></div>
+      <div class="container my-5">
+        <div class="row" id="rowData"></div>
+        <div class="row" id="searchedMealsArea"></div>
+      </div>  
+    </section>
+
+
+    <div class="loading position-fixed top-0 bottom-0 start-0 end-0 bg-black justify-content-center align-items-center">
+      <span class="loader"></span>
+    </div>
+
+    <!-- script files -->
+    <script src="JS/jquery-3.6.3.min.js"></script>
+    <script src="CSS/bootstrap-5.3.0-alpha1-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="JS/index.js" type="module"></script>
+  </body>
+</html>
