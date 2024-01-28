@@ -17,7 +17,7 @@ export class Ui{
         for (let i = 0; i < data.length; i++) {
             mealsBox += `
         
-            <div class="col-md-3 my-3">
+            <div class="col-sm-12 col-md-6 col-lg-3 my-3">
             <div data-id="${data[i].idMeal}" class="meal cursor-pointer w-100 position-relative overflow-hidden
                 rounded-3 ">
                 <img src="${data[i].strMealThumb}" class="w-100 "
@@ -51,7 +51,7 @@ export class Ui{
         let areaBox = ``
         for (let i = 0; i < data.length; i++) {
             areaBox += `
-            <div class="col-md-3">
+            <div class="col-sm-12 col-md-6 col-lg-3">
                             <div data-section="${data[i].strArea}" class="area cursor-pointer d-flex flex-column align-items-center text-white my-3">
                                 <span class="fa-solid fa-house-laptop fs-1"></span>
                                 <h2>${data[i].strArea}</h2>
@@ -68,7 +68,7 @@ export class Ui{
         let categoryBox = ``
         for (let i = 0; i < data.length; i++) {
             categoryBox += `
-                    <div class="col-md-3 my-3">
+                    <div class="col-sm-12 col-md-6 col-lg-3 my-3">
                         <div data-section="${data[i].strCategory}" class="category cursor-pointer w-100 position-relative overflow-hidden
                             rounded-3 ">
                             <img src="${data[i].strCategoryThumb}"
@@ -92,7 +92,7 @@ export class Ui{
         let ingredientsBox = ``
         for (let i = 0; i < data.length; i++) {
                 ingredientsBox+= `
-            <div class="col-md-3">
+            <div class="col-sm-12 col-md-6 col-lg-3">
             <div data-section="${data[i].strIngredient}" class="ingredient cursor-pointer d-flex flex-column align-items-center text-white my-3">
                 <span class="fa-solid fa-drumstick-bite fa-4x"></span>
                 <h2>${data[i].strIngredient}</h2>
